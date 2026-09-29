@@ -1,0 +1,168 @@
+1. Demo video file name
+Use:
+
+AI-BlogNest-API-Demo.mp4
+
+Recommended duration: 2–4 minutes.
+
+2. DEMO-VIDEO-SCRIPT.md
+# AI BlogNest API - Demo Video Script
+
+## Introduction
+
+Hello, this is my AI BlogNest API project.
+
+AI BlogNest is a backend application designed to create,
+manage, update, and delete blog posts through REST APIs.
+
+The project uses Node.js, Express.js, MongoDB and Mongoose.
+
+## Step 1 - Project Structure
+
+First, I will show the project structure.
+
+The project contains:
+
+- config
+- controllers
+- models
+- routes
+- services
+- server.js
+- package.json
+- .env
+
+The application follows a modular MVC-style backend structure.
+
+## Step 2 - Start the Server
+
+I will open the terminal and start the application using:
+
+npm run dev
+
+The server starts on port 5000.
+
+The API can be accessed at:
+
+http://localhost:5000
+
+## Step 3 - Test API
+
+Now I will test the API using Postman.
+
+First, I send a GET request:
+
+GET /api/blogs
+
+This returns the available blog posts.
+
+## Step 4 - Generate AI Blog
+
+Next, I demonstrate the AI blog generation endpoint.
+
+I send a POST request:
+
+POST /api/blogs/generate
+
+Request body:
+
+{
+  "topic": "Artificial Intelligence"
+}
+
+The API processes the topic and returns a generated blog
+with a title, content and tags.
+
+## Step 5 - View Blog
+
+Next, I use:
+
+GET /api/blogs/:id
+
+This retrieves a specific blog using its ID.
+
+## Step 6 - Update Blog
+
+I can update an existing blog using:
+
+PUT /api/blogs/:id
+
+For example, I can change the title or content.
+
+## Step 7 - Delete Blog
+
+Finally, I demonstrate:
+
+DELETE /api/blogs/:id
+
+This removes the selected blog from the database.
+
+## Step 8 - Database
+
+The application uses MongoDB to store blog information.
+
+The main entities are:
+
+User
+Blog
+Comment
+Tag
+BlogTag
+
+The ER diagram shows the relationships between these entities.
+
+## Conclusion
+
+This completes the demonstration of my AI BlogNest API.
+
+The project provides REST APIs for creating, reading,
+updating and deleting blog content, with an AI-based
+blog generation service.
+
+Thank you.
+
+3. What to show in the video
+Record your screen in this order:
+
+1. VS Code → project folder
+             ↓
+2. Show package.json
+             ↓
+3. Show server.js
+             ↓
+4. Show models / routes / controllers
+             ↓
+5. Terminal → npm run dev
+             ↓
+6. Browser → http://localhost:5000
+             ↓
+7. Postman → GET /api/blogs
+             ↓
+8. Postman → POST /api/blogs/generate
+             ↓
+9. Show generated blog JSON
+             ↓
+10. GET individual blog
+             ↓
+11. PUT/update blog
+             ↓
+12. DELETE blog
+             ↓
+13. Show MongoDB data
+             ↓
+14. Show ER diagram
+
+4. SkillWallet submission text
+Paste this into the Demo / Description field:
+
+AI BlogNest API Demo: This video demonstrates the complete backend workflow of the AI BlogNest API. It covers the project architecture, server setup, REST API endpoints, AI blog generation, retrieving blogs, updating blog content, deleting blogs, MongoDB integration, and the database entity relationships. The project is developed using Node.js, Express.js and MongoDB with a modular MVC-style structure.
+
+5. Short version
+If SkillWallet has a small text box, use:
+
+Demo of AI BlogNest API showing server setup, REST endpoints, AI blog generation, CRUD operations, MongoDB integration, and ER-diagram/database relationships.
+
+File: AI-BlogNest-API-Demo.mp4
+Text: DEMO-VIDEO-SCRIPT.md
+
+
