@@ -1,0 +1,241 @@
+ER-DIAGRAM.md
+erDiagram
+
+    USER ||--o{ BLOG : creates
+    BLOG ||--o{ COMMENT : receives
+    USER ||--o{ COMMENT : writes
+    BLOG ||--o{ BLOG_TAG : has
+    TAG ||--o{ BLOG_TAG : contains
+
+    USER {
+        ObjectId _id PK
+        string name
+        string email UK
+        string password
+        string role
+        datetime createdAt
+        datetime updatedAt
+    }
+
+    BLOG {
+        ObjectId _id PK
+        ObjectId authorId FK
+        string title
+        string topic
+        text content
+        string status
+        datetime createdAt
+        datetime updatedAt
+    }
+
+    COMMENT {
+        ObjectId _id PK
+        ObjectId blogId FK
+        ObjectId userId FK
+        text content
+        datetime createdAt
+        datetime updatedAt
+    }
+
+    TAG {
+        ObjectId _id PK
+        string name UK
+    }
+
+    BLOG_TAG {
+        ObjectId blogId FK
+        ObjectId tagId FK
+    }
+
+If you need the actual database model files
+Create these files:
+
+models/
+├── User.js
+├── Blog.js
+├── Comment.js
+├── Tag.js
+└── BlogTag.js
+
+models/User.js
+const mongoose = require("mongoose");
+
+const userSchema = new mongoose.Schema(
+  {
+    name: {
+      type: String,
+      required: true,
+      trim: true
+    },
+
+    email: {
+      type: String,
+      required: true,
+      unique: true,
+      lowercase: true,
+      trim: true
+    },
+
+    password: {
+      type: String,
+      required: true
+    },
+
+    role: {
+      type: String,
+      enum: ["user", "admin"],
+      default: "user"
+    }
+  },
+  {
+    timestamps: true
+  }
+);
+
+module.exports = mongoose.model("User", userSchema);
+
+models/Blog.js
+const mongoose = require("mongoose");
+
+const blogSchema = new mongoose.Schema(
+  {
+    authorId: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "User",
+      required: true
+    },
+
+    title: {
+      type: String,
+      required: true,
+      trim: true
+    },
+
+    topic: {
+      type: String,
+      required: true
+    },
+
+    content: {
+      type: String,
+      required: true
+    },
+
+    status: {
+      type: String,
+      enum: ["draft", "published"],
+      default: "draft"
+    }
+  },
+  {
+    timestamps: true
+  }
+);
+
+module.exports = mongoose.model("Blog", blogSchema);
+
+models/Comment.js
+const mongoose = require("mongoose");
+
+const commentSchema = new mongoose.Schema(
+  {
+    blogId: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "Blog",
+      required: true
+    },
+
+    userId: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "User",
+      required: true
+    },
+
+    content: {
+      type: String,
+      required: true,
+      trim: true
+    }
+  },
+  {
+    timestamps: true
+  }
+);
+
+module.exports = mongoose.model("Comment", commentSchema);
+
+models/Tag.js
+const mongoose = require("mongoose");
+
+const tagSchema = new mongoose.Schema(
+  {
+    name: {
+      type: String,
+      required: true,
+      unique: true,
+      trim: true
+    }
+  },
+  {
+    timestamps: true
+  }
+);
+
+module.exports = mongoose.model("Tag", tagSchema);
+
+models/BlogTag.js
+const mongoose = require("mongoose");
+
+const blogTagSchema = new mongoose.Schema(
+  {
+    blogId: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "Blog",
+      required: true
+    },
+
+    tagId: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "Tag",
+      required: true
+    }
+  },
+  {
+    timestamps: true
+  }
+);
+
+blogTagSchema.index(
+  { blogId: 1, tagId: 1 },
+  { unique: true }
+);
+
+module.exports = mongoose.model("BlogTag", blogTagSchema);
+
+Folder for your SkillWallet project
+AI-BlogNest-API/
+│
+├── config/
+│   └── db.js
+│
+├── controllers/
+│   └── blogController.js
+│
+├── models/
+│   ├── User.js
+│   ├── Blog.js
+│   ├── Comment.js
+│   ├── Tag.js
+│   └── BlogTag.js
+│
+├── routes/
+│   └── blogRoutes.js
+│
+├── services/
+│   └── aiService.js
+│
+├── ER-DIAGRAM.md
+├── server.js
+├── package.json
+├── .env
+└── .gitignore
